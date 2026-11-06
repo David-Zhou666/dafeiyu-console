@@ -6,6 +6,7 @@
 
 ![Node](https://img.shields.io/badge/node-%3E%3D20-339933)
 ![License](https://img.shields.io/badge/license-MIT-blue)
+![ci](https://github.com/David-Zhou666/dafeiyu-console/actions/workflows/ci.yml/badge.svg)
 
 ---
 
