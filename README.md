@@ -81,6 +81,8 @@ plugins/my-panel/
 
 完整字段、SDK 方法、权限表见 [`docs/PLUGINS.md`](docs/PLUGINS.md)。
 
+接自己的模型/后端：见 [`docs/CONFIGURATION.md`](docs/CONFIGURATION.md)。**API key 只能放在服务端环境变量，不能进浏览器或 Git。**
+
 ---
 
 ## 宿主 API（当前）
