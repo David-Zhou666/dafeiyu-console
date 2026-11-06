@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>今日节奏</title>
+<link rel="stylesheet" href="./plugin.css">
+</head>
+<body>
+
+<header class="r-head">
+  <div>
+    <h1>今天的节奏</h1>
+    <p id="r-sub">读取中…</p>
+  </div>
+  <div class="r-mood">
+    <b id="r-mood">—</b>
+    <span>心情</span>
+  </div>
+</header>
+
+<section class="r-stats">
+  <div class="r-stat"><b id="r-reply">—</b><span>回复</span></div>
+  <div class="r-stat"><b id="r-recv">—</b><span>收到</span></div>
+  <div class="r-stat"><b id="r-act">—</b><span>主动</span></div>
+</section>
+
+<section class="r-card">
+  <div class="r-card-head">
+    <h2>24 小时</h2>
+    <span id="r-now" class="r-now">—</span>
+  </div>
+  <svg id="r-svg" class="r-svg" viewBox="0 0 720 170" preserveAspectRatio="xMidYMid meet" role="img" aria-label="24 小时作息与开口时刻"></svg>
+  <div class="r-axis"><span>0</span><span>6</span><span>12</span><span>18</span><span>24</span></div>
+  <div class="r-legend">
+    <span><i class="dot sleep"></i>休息</span>
+    <span><i class="dot idle"></i>惰性</span>
+    <span><i class="dot active"></i>活跃</span>
+    <span><i class="dot talk"></i>她开口</span>
+    <span><i class="dot now"></i>现在</span>
+  </div>
+</section>
+
+<footer class="r-foot">
+  <span>数据来自 <code>/api/overview</code> · 每 30 秒刷新 · 插件只读</span>
+  <span id="r-host">sandbox</span>
+</footer>
+
+<script src="/plugins/sdk.js"></script>
+<script src="./plugin.js"></script>
+</body>
+</html>

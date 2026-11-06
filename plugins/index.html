@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>大肥鱼 · 插件</title>
+<link rel="stylesheet" href="/plugins/gallery.css">
+</head>
+<body>
+
+<header class="g-head">
+  <div>
+    <h1>插件</h1>
+    <p>给控制台加一块自己的面板。插件跑在沙箱里，只能通过宿主读数据。</p>
+  </div>
+  <div class="g-head-right">
+    <span class="g-count" id="g-count">—</span>
+    <button class="g-btn" id="g-refresh" type="button">刷新</button>
+  </div>
+</header>
+
+<main class="g-grid" id="g-grid"></main>
+
+<footer class="g-foot">
+  <span>插件目录：<code>console/public/plugins/</code></span>
+  <span>只读 API · sandbox iframe · 无 cookie 访问</span>
+</footer>
+
+<div class="g-modal" id="g-modal" hidden>
+  <div class="g-modal-box" role="dialog" aria-modal="true" aria-labelledby="g-m-name">
+    <header class="g-modal-head">
+      <div class="g-modal-title"><span id="g-m-name">插件</span><small id="g-m-ver"></small></div>
+      <div class="g-modal-acts">
+        <button class="g-btn" id="g-m-close" type="button">关闭</button>
+      </div>
+    </header>
+    <div class="g-perms" id="g-m-perms"></div>
+    <iframe
+      class="g-frame"
+      id="g-frame"
+      title="插件内容"
+      sandbox="allow-scripts allow-forms"
+      referrerpolicy="no-referrer"
+    ></iframe>
+  </div>
+</div>
+
+<script src="/plugins/registry.js"></script>
+<script src="/plugins/gallery.js"></script>
+</body>
+</html>

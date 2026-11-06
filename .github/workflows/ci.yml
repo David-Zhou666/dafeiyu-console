@@ -1,0 +1,28 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: syntax
+        run: |
+          node --check plugins/gallery.js
+          node --check plugins/sdk.js
+          node --check plugins/rhythm/plugin.js
+          node --check demo/server.mjs
+          node --check demo/smoke.mjs
+
+      - name: smoke
+        run: node demo/smoke.mjs
+
+      - name: release check
+        run: node tools/release-check.mjs
