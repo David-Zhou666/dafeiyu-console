@@ -13,7 +13,7 @@
 
 (() => {
   const $ = (s) => document.querySelector(s)
-  const 插件们 = Array.isArray(window.QIYU_PLUGINS) ? window.QIYU_PLUGINS : []
+  let 插件们 = Array.isArray(window.QIYU_PLUGINS) ? window.QIYU_PLUGINS : []
   const 网格 = $('#g-grid')
   const 弹窗 = $('#g-modal')
   const 框 = $('#g-frame')
@@ -164,4 +164,15 @@
   }
 
   画()
+
+  // 有服务端清单就用扫描结果；静态托管（GitHub Pages）没有这个接口，继续用 registry。
+  fetch('/api/plugins', { headers: { accept: 'application/json' } })
+    .then((r) => (r.ok ? r.json() : null))
+    .then((d) => {
+      if (d && Array.isArray(d.插件们) && d.插件们.length) {
+        插件们 = d.插件们
+        画()
+      }
+    })
+    .catch(() => {})
 })()

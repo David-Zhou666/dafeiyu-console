@@ -1,0 +1,9 @@
+{
+  "id": "rhythm",
+  "name": "今日节奏",
+  "version": "0.1.0",
+  "desc": "把作息、她今天开口的时刻和心情画在一根 24 小时尺上。",
+  "icon": "◔",
+  "permissions": ["overview:read"],
+  "entry": "/plugins/rhythm/index.html"
+}

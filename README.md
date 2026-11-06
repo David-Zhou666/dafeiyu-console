@@ -48,24 +48,27 @@ node demo/smoke.mjs
 
 ```
 plugins/my-panel/
+├─ plugin.json
 ├─ index.html
 ├─ panel.js
 └─ panel.css
 ```
 
-2. 在 `plugins/registry.js` 加一条：
+2. 写 `plugin.json`：
 
-```js
+```json
 {
-  id: 'my-panel',
-  name: '我的面板',
-  version: '0.1.0',
-  desc: '一句话说明',
-  icon: '◈',
-  permissions: ['overview:read'],
-  entry: '/plugins/my-panel/index.html',
+  "id": "my-panel",
+  "name": "我的面板",
+  "version": "0.1.0",
+  "desc": "一句话说明",
+  "icon": "◈",
+  "permissions": ["overview:read"],
+  "entry": "/plugins/my-panel/index.html"
 }
 ```
+
+`demo/server.mjs` 会自动扫描 `plugins/*/plugin.json`；纯静态托管时再把同一条加到 `plugins/registry.js` 作为兜底。
 
 3. 插件里：
 

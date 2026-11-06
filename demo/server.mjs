@@ -12,7 +12,7 @@
  */
 
 import { createServer } from 'node:http'
-import { readFile, stat } from 'node:fs/promises'
+import { readdir, readFile, stat } from 'node:fs/promises'
 import { extname, join, normalize, sep } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
@@ -85,6 +85,20 @@ const 配置 = { ok: true, 主动: { 总开关: true }, 桥: { 总开关: true }
 const 人设 = { ok: true, 文本: '# 示例角色\n\n这是公开 demo 的空白人设。', 路径: 'demo', 行数: 3, 字节: 40, 备份: [] }
 const 群聊 = { ok: true, 群会话: 'demo', 群会话醒着: false, 正在听: [], 黑名单: [], 速度: {} }
 
+async function 列出插件() {
+  const 名们 = await readdir(插件目录).catch(() => [])
+  const 出 = []
+  for (const 名 of 名们) {
+    try {
+      const j = JSON.parse(await readFile(join(插件目录, 名, 'plugin.json'), 'utf8'))
+      if (j && j.id && j.name && j.entry) 出.push(j)
+    } catch {
+      /* 没有 plugin.json 的目录跳过 */
+    }
+  }
+  return 出.sort((a, b) => String(a.id).localeCompare(String(b.id)))
+}
+
 function 发JSON(res, 码, 体) {
   const s = JSON.stringify(体)
   res.writeHead(码, { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' })
@@ -117,6 +131,9 @@ export function createDemoServer() {
     }
     if (p === '/health') return 发JSON(res, 200, { ok: true })
 
+    if (p === '/api/plugins') {
+      return 发JSON(res, 200, { ok: true, 插件们: await 列出插件() })
+    }
     if (p === '/api/overview') return 发JSON(res, 200, 概览)
     if (p === '/api/stats') return 发JSON(res, 200, 统计)
     if (p === '/api/config') return 发JSON(res, 200, 配置)

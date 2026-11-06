@@ -7,25 +7,31 @@ plugins/
 ├─ index.html          宿主页
 ├─ gallery.js          宿主逻辑：清单、沙箱、权限、postMessage
 ├─ gallery.css
-├─ registry.js         插件清单
+├─ registry.js         静态部署的清单兜底
 ├─ sdk.js              插件侧 SDK
-├─ rhythm/             示例：今日节奏
+├─ rhythm/             示例：今日节奏（plugin.json + 页面）
 └─ README.md           本文件
 ```
 
 ## 清单字段
 
-```js
+推荐每个插件目录放一个 `plugin.json`：
+
+```json
 {
-  id: 'rhythm',                 // 唯一，建议等于目录名
-  name: '今日节奏',
-  version: '0.1.0',
-  desc: '一句话说明',
-  icon: '◔',                   // 一个字符/emoji
-  permissions: ['overview:read'],
-  entry: '/plugins/rhythm/index.html',
+  "id": "rhythm",
+  "name": "今日节奏",
+  "version": "0.1.0",
+  "desc": "一句话说明",
+  "icon": "◔",
+  "permissions": ["overview:read"],
+  "entry": "/plugins/rhythm/index.html"
 }
 ```
+
+`demo/server.mjs` 会扫描 `plugins/*/plugin.json`，通过 `GET /api/plugins` 返回清单；宿主优先用这份清单。
+
+纯静态托管（没有 `/api/plugins`）时，回退到 `registry.js`，所以加插件时两处都可以写；本地 demo 只写 `plugin.json` 就够。
 
 `id` 只用小写字母、数字、短横线；`entry` 必须在 `/plugins/` 下。
 
